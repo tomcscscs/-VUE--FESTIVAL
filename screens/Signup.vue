@@ -1,12 +1,13 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center vh-100">
+  <div
+    class="d-flex justify-content-center align-items-center vh-100 position-relative"
+  >
+    <h1>value = {{ value }}</h1>
     <div
       class="signup border border-1 d-flex flex-column justify-content-between"
     >
       <div class="text-center py-3 px-3">
-        <p class="fw-bold fs-5">
-          간편하게 가입하고<br />다양한 서비스를 이용하세요.
-        </p>
+        <p class="fs-4">간편하게 가입하고<br />다양한 서비스를 이용하세요.</p>
         <div class="py-2">
           <input
             type="text"
@@ -41,22 +42,30 @@
         </button>
       </div>
     </div>
+    <div
+      v-if="cause"
+      class="alert alert-dark bottom-0 start-50 translate-middle-x w-50 position-absolute fs-5 text-center mb-6"
+      role="alert"
+    >
+      {{ cause }}
+    </div>
   </div>
 </template>
 <script>
 export default {
+  inject: ["value"],
   data: function () {
     return {
       id: null,
       password: null,
       passwordCheck: null,
+      cause: null,
     };
   },
   methods: {
     handleSubmit: function () {
-      if (!this.id || !this.password || !this.passwordCheck) return;
       console.log("??");
-      fetch("http://192.168.4.46:7030/api/user/signup", {
+      fetch("http://192.168.4.22:8030/api/user/signup", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -72,7 +81,10 @@ export default {
           if (result.success) {
             this.$router.push("/login/email");
           } else {
-            window.alert(result.cause);
+            this.cause = result.cause;
+            setTimeout(() => {
+              this.cause = null;
+            }, 2000);
           }
         });
     },
@@ -81,7 +93,7 @@ export default {
 </script>
 <style scoped>
 .signup {
-  width: 380px;
+  width: 520px;
   height: 488px;
 }
 .form-control {

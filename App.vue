@@ -1,11 +1,28 @@
 <template>
-  <navigation></navigation>
   <RouterView />
 </template>
 <script>
-import Navigation from "./commons/Navigation.vue";
+import { computed } from "vue";
 export default {
-  components: { Navigation },
+  data: function () {
+    return { user: null, token: null };
+  },
+  methods: {
+    setUser: function (val) {
+      this.user = val;
+    },
+    setToken: function (val) {
+      this.token = val;
+    },
+  },
+  provide: function () {
+    return {
+      user: computed(() => this.user),
+      token: computed(() => this.token),
+      setUser: this.setUser,
+      setToken: this.setToken,
+    };
+  },
 };
 </script>
 <style>
@@ -18,6 +35,9 @@ export default {
 }
 
 #app {
-  min-width: 1200px;
+  min-width: 986px;
+}
+.fs-7 {
+  font-size: 0.9rem;
 }
 </style>

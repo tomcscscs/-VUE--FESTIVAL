@@ -6,7 +6,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import App from "./App.vue";
 
-import Landing from "./screens/Landing.vue";
+import Landing from "./screens/Map.vue";
 import Login from "./screens/Login.vue";
 import Signup from "./screens/Signup.vue";
 
