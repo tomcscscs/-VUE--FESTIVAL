@@ -10,9 +10,13 @@ export default {
   methods: {
     setUser: function (val) {
       this.user = val;
+      if (val) localStorage.setItem("user", JSON.stringify(this.user));
+      else localStorage.removeItem("user");
     },
     setToken: function (val) {
       this.token = val;
+      if (val) localStorage.setItem("token", this.token);
+      else localStorage.removeItem("token");
     },
   },
   provide: function () {
@@ -22,6 +26,12 @@ export default {
       setUser: this.setUser,
       setToken: this.setToken,
     };
+  },
+  mounted: function () {
+    if (localStorage.getItem("user") && localStorage.getItem("token")) {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      this.token = localStorage.getItem("token");
+    }
   },
 };
 </script>

@@ -6,7 +6,11 @@
       <div class="col-3 ps-1" style="height: 90vh; overflow-y: auto">
         <div class="h-100" v-if="!fetching">
           <ul class="list-group" v-if="currentFestivals.length !== 0">
-            <li v-for="one in currentFestivals" v-bind:key="one.id">
+            <li
+              v-for="one in currentFestivals"
+              v-bind:key="one.id"
+              @click="$router.push('/map/festival/' + one.id)"
+            >
               <div
                 class="border border-1 list-group-item list-group-item-action p-2 rounded-1 mb-1"
               >
@@ -62,6 +66,7 @@
       </div>
     </div>
   </div>
+  <RouterView />
 </template>
 <script>
 import Navigation from "../components/common/Navigation.vue";

@@ -1,8 +1,9 @@
 <template>
+  <navigation />
   <div
     class="d-flex justify-content-center align-items-center vh-100 position-relative"
   >
-    <h1>value = {{ value }}</h1>
+    <h1>{{ value }}</h1>
     <div
       class="signup border border-1 d-flex flex-column justify-content-between"
     >
@@ -52,9 +53,12 @@
   </div>
 </template>
 <script>
+import Nevigation from "@/components/common/Navigation.vue";
+import Navigation from "@/components/common/Navigation.vue";
 export default {
   inject: ["value"],
-  data: function () {
+  components: { Navigation },
+  data: function Navigation() {
     return {
       id: null,
       password: null,
@@ -65,7 +69,7 @@ export default {
   methods: {
     handleSubmit: function () {
       console.log("??");
-      fetch("http://192.168.4.22:8030/api/user/signup", {
+      fetch("http://192.168.4.46:7030/api/user/signup", {
         method: "post",
         headers: {
           "content-type": "application/json",
